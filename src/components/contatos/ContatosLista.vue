@@ -3,6 +3,16 @@
         <div>
             <h3 class="font-weight-light">Contatos</h3>
 
+            <div class="form-group">
+                <input 
+                    type="search" 
+                    name="" 
+                    id=""
+                    placeholder="buscar contatos"
+                    @keyup.enter="buscar"
+                    :value="$route.query.busca">
+            </div>
+            <hr>
             <ul class="list-group" v-if="contatos.length > 0">
                 <contatos-lista-item
                 class="list-group-item"
@@ -35,6 +45,12 @@ export default {
         }
     },
     methods: {
+        buscar(event) {
+            this.$router.push({
+                path: '/contatos',
+                query: { busca: event.target.value }
+            })
+        },
         voltar() {
             // this.$router.push({path: '/'})
             // this.$router('/')
@@ -42,5 +58,13 @@ export default {
             this.$router.back()
         }
     },
+    // computed: {
+    //     contatosFiltrados() {
+    //         const busca = this.$route.query.busca
+    //         return !busca
+    //         ? this.contatos
+    //         : this.contatos.filter(conta => conta.nome.toLowerCase().includes(busca.toLowerCase()))
+    //     }
+    // },
 }
 </script>
