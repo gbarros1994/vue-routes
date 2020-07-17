@@ -1,6 +1,8 @@
 <template>
     <div>
         <h3>Detalhes sobre o contato com id {{ id }}</h3>
+        <router-link 
+            :to="`/contatos/${id}/editar`">Editar</router-link>
     </div>
 </template>
 

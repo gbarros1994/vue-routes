@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import Contatos from './views/contatos/Contatos.vue'
 import ContatoDetalhes from './views/contatos/ContatoDetalhes.vue'
 import ContatosHome from './views/contatos/ContatosHome.vue'
+import ContatoEditar from './views/contatos/ContatoEditar.vue'
 import Home from './views/Home.vue'
 
 Vue.use(VueRouter)
@@ -13,14 +14,25 @@ export default new VueRouter({
   linkActiveClass: 'active',
   routes: [
     {
-      path: '/contatos',
+      path: '/meus-contatos',
       component:  Contatos,
       children: [
-        { path: ':id', component: ContatoDetalhes, name: 'contato'},
+        {
+          path: ':id',
+          component: ContatoDetalhes,
+          name: 'contato'
+        },
+        {
+          path:':id/editar',
+          components: {
+            default: ContatoEditar,
+            'contato-detalhes': ContatoDetalhes
+          }
+        },
         { path: '', component: ContatosHome },
       ]
     },
-
+    { path:'/contatos', redirect: '/meus-contatos' },
     { path: '/', component:  Home },
   ]
 })
